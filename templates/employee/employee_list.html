@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Employee Management</title>
+ <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+
+
+
+<body>
+	
+	{% for employee in object_list %}
+		<table  class="table table-bordered">
+		<tr>
+			<td> {{employee.name}}</td>
+			<td>{{employee.dob}}</td>
+			<td>{{employee.age}}</td>
+
+			<td>
+			<ul>
+				{% for qualification in employee.qualification_set.all %}
+					<li>{{qualification.course}} - {{qualification.branch}} - {{qualification.pass_out_year}}</li>
+				{% endfor %}
+			</ul>
+			</td>
+			<td><a href="/employees/edit/{{employee.id}}"><button type="button" class="btn btn-primary">Edit</button></a>
+			<a href="/employees/delete/{{employee.id}}"><button type="button" class="btn btn-danger">Delete</button></a></td>
+			<hr>
+		</tr>	
+		</table>
+
+	{% endfor %}
+	<p>
+		<a href="/employees/add/"><button type="button" class="btn btn-primary">Add Employee</button></a>
+	</p>
+
+</body>
+</html>

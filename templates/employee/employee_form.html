@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Employee Management</title>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  	<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+  	<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  	<script>
+  		$(function() {
+  			$( "#id_dob" ).datepicker();
+  		});
+  	</script>
+</head>
+<body>
+<div class="container">
+	<div class="row">
+		<div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+			<form action="." method="post">
+			    {% csrf_token %}
+			    {{ form.as_p }}
+
+			    <h3>Qualifications</h3>
+				{{ qualifications.management_form }}
+				<div id="form_set">
+				    {% for form in qualifications.forms %}
+				        {{ form.as_p }}
+				        <hr>
+				    {% endfor %}
+				</div>
+				<input type="button" class="btn btn-primary" value="Add More Qualification" id="add_more">
+				<div id="empty_form" style="display:none">
+				    <table class='no_error'>
+				        {{ qualifications.empty_form.as_p }}
+				    </table>
+				</div>
+			    <input type="submit" class="btn btn-success" value="Submit" />
+			</form>
+		</div>
+	</div>
+</div>
+	<script>
+		$(document).ready(function(){
+			// Jquery datepicker for date of birth.
+			$( "#id_dob" ).datepicker();
+
+			// Function to add more qualification forms.
+		    $('#add_more').on("click", function() {
+		        var form_idx = $('#id_qualification_set-TOTAL_FORMS').val();
+		        $('#form_set').append($('#empty_form').html().replace(/__prefix__/g, form_idx));
+		        $('#id_qualification_set-TOTAL_FORMS').val(parseInt(form_idx) + 1);
+		        $('#form_set').append('<hr>');
+		    });
+	    });
+	</script>
+</body>
+</html>

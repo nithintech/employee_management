@@ -1,4 +1,4 @@
-"""mediaone URL Configuration
+"""employee_management URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.8/topics/http/urls/
@@ -14,9 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
 from django.conf.urls import url
-from employee.views import (EmployeeListView, EmployeeCreateView, EmployeeDeleteView, EmployeeUpdateView,
-                            # QualificationListView, QualificationCreateView, QualificationDeleteView, QualificationUpdateView
-                            )
+from employee.views import EmployeeListView, EmployeeCreateView, EmployeeDeleteView, EmployeeUpdateView
 
 
 urlpatterns = [
@@ -24,8 +22,4 @@ urlpatterns = [
     url(r'^add/$', EmployeeCreateView.as_view()),
     url(r'^delete/(?P<pk>[\w]+)/$', EmployeeDeleteView.as_view()),
     url(r'^edit/(?P<pk>[\w]+)/$', EmployeeUpdateView.as_view()),
-    # url(r'^qualifications/$', QualificationListView.as_view()),
-    # url(r'^qualifications/add/$', QualificationCreateView.as_view()),
-    # url(r'^qualifications/delete/(?P<pk>[\w]+)/$', QualificationDeleteView.as_view()),
-    # url(r'^qualifications/edit/(?P<pk>[\w]+)/$', QualificationUpdateView.as_view()),
 ]
